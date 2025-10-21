@@ -1,4 +1,4 @@
-function Header() {
+function Header({score}) {
     return (
         <>
             <div className="flex-col flex-cen">

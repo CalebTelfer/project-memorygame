@@ -4,11 +4,12 @@ import Header from './components/header'
 import GameBoard from './components/gameBoard'
 
 function App() {
+  const [score, setScore] = useState(0);
 
   return (
     <>
-      <Header/>
-      <GameBoard/>
+      <Header score={score}/>
+      <GameBoard setScore={setScore}/>
     </>
   )
 }
