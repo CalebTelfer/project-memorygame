@@ -3,7 +3,7 @@ import MemoryCard from "./memoryCard"
 import '../componentCSS/gameBoard.css'
 
 function GameBoard({setScore}) {
-    const pokemonNames = ["Ditto", "Pikachu", "Charizard", "Blastoise", "Venasaur", "Gengar", "Zacian", "Lugia", "Victini", "Articuno"];
+    const pokemonNames = ["Ditto", "Pikachu", "Charizard", "Blastoise", "Venusaur", "Gengar", "Zacian", "Lugia", "Victini", "Articuno"];
     const [pokemonList, setList] = useState([]);
 
 
@@ -23,9 +23,8 @@ function GameBoard({setScore}) {
                     name: result.name,
                     img: result.sprites.other["official-artwork"].front_default
                 }));
-
+                
                 setList(formattedResults);
-
             } catch (error) {
                 console.log("One or more failed");
             }
@@ -42,8 +41,15 @@ function GameBoard({setScore}) {
 
     return (
         <>
-        <div className="gameboard">
-
+        <div className="gameboard flex flex-cen gap1">
+            {
+                pokemonList.map(pokemon => (
+                    <div key={pokemon.name} className="card flex-col flex-cen" onClick={handleCardClick}>
+                        <img src={pokemon.img} alt={pokemon.name}></img>
+                        <h2>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
+                    </div>
+                ))
+            }
         </div>
         </>
     )
