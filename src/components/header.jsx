@@ -1,4 +1,4 @@
-function Header({score}) {
+function Header({score, highScore}) {
     return (
         <>
             <div className="flex-col flex-cen">
@@ -8,12 +8,12 @@ function Header({score}) {
                 <div className="flex gap6">
                     <div className="flex gap1">
                         <h3>Score:</h3>
-                        <h3 className="score">0</h3>
+                        <h3 className="score">{score}</h3>
                     </div>
 
                     <div className="flex gap1">
                         <h3>High Score: </h3>
-                        <h3 className="highscore">0</h3>
+                        <h3 className="highscore">{highScore}</h3>
                     </div>
                 </div>
             </div>

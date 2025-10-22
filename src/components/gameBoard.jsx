@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import MemoryCard from "./memoryCard"
 import '../componentCSS/gameBoard.css'
 
-function GameBoard({setScore}) {
+function GameBoard({score, highScore, setScore, setHighScore}) {
     const pokemonNames = ["Ditto", "Pikachu", "Charizard", "Blastoise", "Venusaur", "Gengar", "Zacian", "Lugia", "Victini", "Articuno"];
     const [pokemonList, setList] = useState([]);
+    const [clickedCards, setClickedCards] = useState([]);
 
 
 
@@ -35,8 +36,17 @@ function GameBoard({setScore}) {
 
 
 
-    const handleCardClick = () => {
-        setScore(prevScore => prevScore + 1); // update score
+    const handleCardClick = (pokemonName) => {
+        if(clickedCards.indexOf(pokemonName) == -1) {
+            setClickedCards(prev => [...prev, pokemonName]);
+            setScore(prevScore => prevScore + 1); // update score
+
+            if(score + 1 > highScore) { //+1 here to account for weird react state updating times
+                setHighScore(score + 1);
+            }
+        } else {
+            setScore(0); // update score
+        }
       };
 
     return (
@@ -44,7 +54,7 @@ function GameBoard({setScore}) {
         <div className="gameboard flex flex-cen gap1">
             {
                 pokemonList.map(pokemon => (
-                    <div key={pokemon.name} className="card flex-col flex-cen" onClick={handleCardClick}>
+                    <div key={pokemon.name} className="card flex-col flex-cen" onClick={() => handleCardClick(pokemon.name)}>
                         <img src={pokemon.img} alt={pokemon.name}></img>
                         <h2>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
                     </div>
