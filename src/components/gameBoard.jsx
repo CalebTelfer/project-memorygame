@@ -45,9 +45,27 @@ function GameBoard({score, highScore, setScore, setHighScore}) {
                 setHighScore(score + 1);
             }
         } else {
-            setScore(0); // update score
+            setScore(0); // game over
+
+            setClickedCards([]);
         }
+
+        shuffleCards();
       };
+
+      const shuffleCards = () => {
+        const newArray = [...pokemonList];
+
+        for (let i = newArray.length -1; i> 0; i--) {
+            const j = Math.floor(Math.random() * (i+1)); //random index from 0-i
+
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; //swap random index with i
+        }
+
+        setList(newArray);
+      }
+
+      
 
     return (
         <>
